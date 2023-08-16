@@ -22,9 +22,9 @@ if ($_FILES["file"]["size"] > 5000000) { // 5MB
 }
 
 // Allow only specific file formats
-$allowedFileTypes = array("dll", "txt", "exe", "log", "xpr");
+$allowedFileTypes = array("dll", "txt", "exe", "log", "xpr", "7z");
 if (!in_array($fileType, $allowedFileTypes)) {
-    echo "Sorry, only DLL, TXT, EXE, LOG, and XPR files are allowed.";
+    echo "Sorry, only DLL, TXT, EXE, LOG, XPR, and 7Z files are allowed.";
     $uploadOk = 0;
 }
 
@@ -34,6 +34,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
         echo "The file " . basename($_FILES["file"]["name"]) . " has been uploaded.";
+        header("Location: file_list.php"); // Redirect to the file listing page
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
